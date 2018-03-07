@@ -1,12 +1,11 @@
 //: Playground - noun: a place where people can play
 
 func multiply(lhs: Int, rhs: UInt) -> Int {
-//    return lhs * rhs
     var total = 0
-    for _ in 0..<rhs {
+    (0..<rhs).forEach { _ in
         total += lhs
     }
     return total
 }
 
-multiply(lhs: 2, rhs: 2)
+multiply(lhs: 2, rhs: 3)
