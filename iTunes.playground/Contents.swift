@@ -107,7 +107,7 @@ class MovieResult: SearchResult {
     }
 }
 
-let url = URL(string: "https://itunes.apple.com/search?term=frozen&kind=all")!
+let url = URL(string: "https://itunes.apple.com/search?term=frozen&media=all")!
 let data = try! Data(contentsOf: url)
 let jsonDecoder = JSONDecoder()
 
