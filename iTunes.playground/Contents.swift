@@ -2,6 +2,57 @@
 
 import Cocoa
 
+class SearchResult: Decodable {
+    let wrapperType: String
+    let kind: String
+}
+
+class SongResult: SearchResult {
+    let trackName: String
+    let artistName: String
+    let trackNumber: Int
+    let trackCount: Int
+    let discNumber: Int
+
+    enum CodingKeys: String, CodingKey {
+        case trackName
+        case artistName
+        case trackNumber
+        case trackCount
+        case discNumber
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        trackName = try container.decode(String.self, forKey: .trackName)
+        artistName = try container.decode(String.self, forKey: .artistName)
+        trackNumber = try container.decode(Int.self, forKey: .trackNumber)
+        trackCount = try container.decode(Int.self, forKey: .trackCount)
+        discNumber = try container.decode(Int.self, forKey: .discNumber)
+        try super.init(from: decoder)
+    }
+}
+
+class MovieResult: SearchResult {
+    let name: String
+    let director: String
+    let rating: String
+
+    enum CodingKeys: String, CodingKey {
+        case name = "trackName"
+        case director = "artistName"
+        case rating = "contentAdvisoryRating"
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        director = try container.decode(String.self, forKey: .director)
+        rating = try container.decode(String.self, forKey: .rating)
+        try super.init(from: decoder)
+    }
+}
+
 struct SearchResponse: Decodable {
     let resultCount: Int
     let results: [SearchResult]
@@ -53,57 +104,6 @@ enum SearchResultWrapper: Decodable {
         default:
             throw DecodingError.dataCorruptedError(forKey: .kind, in: container, debugDescription: "Unhandled kind: \(kind)")
         }
-    }
-}
-
-class SearchResult: Decodable {
-    let wrapperType: String
-    let kind: String
-}
-
-class SongResult: SearchResult {
-    let trackName: String
-    let artistName: String
-    let trackNumber: Int
-    let trackCount: Int
-    let discNumber: Int
-
-    enum CodingKeys: String, CodingKey {
-        case trackName
-        case artistName
-        case trackNumber
-        case trackCount
-        case discNumber
-    }
-
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        trackName = try container.decode(String.self, forKey: .trackName)
-        artistName = try container.decode(String.self, forKey: .artistName)
-        trackNumber = try container.decode(Int.self, forKey: .trackNumber)
-        trackCount = try container.decode(Int.self, forKey: .trackCount)
-        discNumber = try container.decode(Int.self, forKey: .discNumber)
-        try super.init(from: decoder)
-    }
-}
-
-class MovieResult: SearchResult {
-    let name: String
-    let director: String
-    let rating: String
-
-    enum CodingKeys: String, CodingKey {
-        case name = "trackName"
-        case director = "artistName"
-        case rating = "contentAdvisoryRating"
-    }
-
-    required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        name = try container.decode(String.self, forKey: .name)
-        director = try container.decode(String.self, forKey: .director)
-        rating = try container.decode(String.self, forKey: .rating)
-        try super.init(from: decoder)
     }
 }
 
