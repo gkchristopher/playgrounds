@@ -36,19 +36,19 @@ struct Trie {
         }
     }
 
-    static func prettyPrint(root: Node, appendTo: String = "") {
-        var result = ""
-        guard !root.children.isEmpty else {
-            print(result)
-            return
-        }
-
-        root.children.forEach { (child) in
-            result.append(child.key)
-            Trie.prettyPrint(root: child.value)
-        }
-    }
+//    static func prettyPrint(root: Node, appendTo: String = "") {
+//        var result = ""
+//        guard !root.children.isEmpty else {
+//            print(result)
+//            return
+//        }
+//
+//        root.children.forEach { (child) in
+//            result.append(child.key)
+//            Trie.prettyPrint(root: child.value)
+//        }
+//    }
 }
 
 let trie = Trie(data: ["hello", "help"])
-Trie.prettyPrint(root: trie.root)
+//Trie.prettyPrint(root: trie.root)
