@@ -11,13 +11,15 @@ sceneView.autoenablesDefaultLighting = true
 PlaygroundPage.current.liveView = sceneView
 
 let node = SCNNode()
-node.geometry = SCNSphere(radius: 1)
-node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "earth-diffuse.jpg")
-node.geometry?.firstMaterial?.specular.contents = UIImage(named: "specular.png")
-node.geometry?.firstMaterial?.emission.contents = UIImage(named: "emission.png")
-node.geometry?.firstMaterial?.normal.contents = UIImage(named: "normal.png")
+node.geometry = SCNPlane(width: 300, height: 300)
+node.geometry?.firstMaterial?.diffuse.contents = UIImage(named: "brickwall.jpg")
+node.geometry?.firstMaterial?.normal.contents = UIImage(named: "brickwall_normal.jpg")
+//node.geometry?.firstMaterial?.specular.contents = UIImage(named: "specular.png")
+//node.geometry?.firstMaterial?.emission.contents = UIImage(named: "emission.png")
+//node.geometry?.firstMaterial?.multiply.contents = UIColor.blue
+node.geometry?.firstMaterial?.isDoubleSided = true
 scene.rootNode.addChildNode(node)
 
-let action = SCNAction.rotate(by: 2 * .pi, around: SCNVector3(0, 1, 0), duration: 8)
+let action = SCNAction.rotate(by: 2 * .pi, around: SCNVector3(0, 1, 0), duration: 20)
 let repeatAction = SCNAction.repeatForever(action)
 node.runAction(repeatAction)
