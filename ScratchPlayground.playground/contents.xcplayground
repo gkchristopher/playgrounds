@@ -6,5 +6,6 @@
         <page name='Test'/>
         <page name='Filter'/>
         <page name='Generic completion parameter'/>
+        <page name='Delay'/>
     </pages>
 </playground>
